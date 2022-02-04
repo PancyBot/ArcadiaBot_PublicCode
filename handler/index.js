@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const  fs = require('fs')
 const { glob } = require("glob");
 const { promisify } = require("util");
 const { Client } = require("discord.js");
@@ -60,6 +61,21 @@ module.exports = async (client) => {
     }
 
     console.log(`${Date.now() - data12} ms se tardo en cargar el handler`)
+
+    //Error Hanler
+
+    process.on('uncaughtException', async (err) => {
+        fs.writeFile(`../crash_logs/crash_${new Date()}.log`, err, (error) => {
+            if(error) {
+                console.error(`No se pudo escribir el reporte de crash: ${error}`)
+                return process.exit(1)
+            } else {
+                console.info(`Se escribio correctamente: crash_${new Date()}.log\n`)
+                console.info('Terminando proceso...')
+                return process.exit(1)
+            }
+        })
+    })
 
 
 };

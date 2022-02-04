@@ -2,3 +2,4 @@ node_modules
 package-lock.json
 mega_databases
 .env
+crash_logs
