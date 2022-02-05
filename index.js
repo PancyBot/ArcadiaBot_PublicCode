@@ -41,9 +41,3 @@ client.login(process.env.TOKEN_ARCADIA_BOT);
 
 
 const aoijs = require('./dbd.js')
-var cp = require('child_process');
-cp.execFile('./audit.sh', function(err, stdout, stderr) {
-  if(err) return console.error(err)
-    console.debug(stdout)
-    console.debug(stderr)
-});

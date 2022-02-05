@@ -1,9 +1,8 @@
-const db = require('megadb');
-const client = require('../index')
-const staffs = new db.crearDB('staffs', 'info')
 
 const megadb = require('megadb')
-const db = new megadb.crearDB('mute_timeout', 'info')
+const client = require('../index')
+const staffs = new megadb.crearDB('staffs', 'info')
+const db = new megadb.crearDB('mute_timeout', 'mutes')
 
 client.on("guildMemberAdd", async member => {
 	console.log('Tremendo')
@@ -34,7 +33,7 @@ client.on("guildMemberAdd", async member => {
         };
   
    if(member.guild.id == "741489702963773501") {
-   let mute = await db.get(`${member.guild.id}.${member.id}.isMuted`) ?? false
+   let mute = await db.get(`${member.guild.id}-${member.id}-isMuted`, '-') ?? false
 
    if(mute === false) {
 	      
